@@ -196,6 +196,38 @@
       font-size: 1.1rem;
     }
 
+    .referral-code-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .copy-code-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      cursor: pointer;
+    }
+
+    .copy-code-button svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .copy-code-button:hover {
+      color: var(--gold-light);
+    }
+
     .referral-code-box {
       margin-top: 22px;
       padding-top: 17px;
@@ -716,7 +748,15 @@
 
               <div class="referral-code-box">
                 <span class="referral-code-label">Your referral code</span>
-                <span class="referral-code">RFDHXMF7</span>
+                <div class="referral-code-row">
+                  <span class="referral-code">RFDHXMF7</span>
+                  <button class="copy-code-button" type="button" onclick="copyReferralCode(this)" aria-label="Copy referral code" title="Copy code">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+                      <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
+                    </svg>
+                  </button>
+                </div>
                 <p class="referral-code-instruction">Enter this code when creating your new account.</p>
               </div>
             </div>
@@ -825,5 +865,21 @@
       >Meridian's official referral offer and terms</a>.
     </p>
   </footer>
+
+  <script>
+    function copyReferralCode(button) {
+      const originalIcon = button.innerHTML;
+
+      navigator.clipboard.writeText('RFDHXMF7').then(() => {
+        button.textContent = 'Copied!';
+        button.setAttribute('aria-label', 'Referral code copied');
+
+        setTimeout(() => {
+          button.innerHTML = originalIcon;
+          button.setAttribute('aria-label', 'Copy referral code');
+        }, 1800);
+      });
+    }
+  </script>
 </body>
 </html>
